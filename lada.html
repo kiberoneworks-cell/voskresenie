@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Бриллиантовая семья — Лада, Анастасия и супергерои</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: radial-gradient(circle at 10% 30%, rgba(255,245,210,0.4) 0%, rgba(230,245,255,0.6) 100%),
+                        repeating-linear-gradient(45deg, 
+                            rgba(255,215,150,0.25) 0px, rgba(255,215,150,0.25) 3px, 
+                            transparent 3px, transparent 12px),
+                        repeating-linear-gradient(135deg, 
+                            rgba(200,220,255,0.35) 0px, rgba(200,220,255,0.35) 2px, 
+                            transparent 2px, transparent 10px),
+                        linear-gradient(125deg, #fef9e6, #e0f0fe, #cae3f2);
+            background-blend-mode: overlay, normal, normal, normal;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Бриллиантовый эффект — дополнительные мерцающие частицы */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: radial-gradient(circle at 25% 40%, rgba(255,255,210,0.4) 1.5px, transparent 1.5px),
+                              radial-gradient(circle at 75% 85%, rgba(255,240,170,0.5) 2px, transparent 2px);
+            background-size: 55px 55px, 80px 80px;
+            background-repeat: repeat;
+            z-index: 0;
+        }
+
+        /* основной контент поверх фона */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* заголовок */
+        .hero {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            background: rgba(255, 248, 225, 0.6);
+            backdrop-filter: blur(3px);
+            border-radius: 70px;
+            padding: 1.8rem 1rem;
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,200,0.8);
+        }
+
+        .hero h1 {
+            font-size: 3.6rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #FFD966, #FFB347, #F4A261, #E76F51, #9C89B8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 20px rgba(255,215,0,0.3);
+            margin-bottom: 0.6rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e4e;
+            background: rgba(255,250,215,0.7);
+            display: inline-block;
+            padding: 0.3rem 1.8rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* сетка карточек */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* стиль карточки — круглые углы, бриллиантовый отблеск */
+        .card {
+            background: rgba(255, 255, 248, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 48px;
+            padding: 1.8rem 1.5rem 2rem 1.5rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,235,160,0.6) inset, 0 0 0 3px rgba(255,250,210,0.4) inset;
+            text-align: center;
+            transform: scale(1);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 35px -15px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255,225,130,0.8) inset;
+            background: rgba(255, 255, 250, 0.97);
+        }
+
+        /* эмодзи-аватар */
+        .avatar {
+            font-size: 4.3rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            background: rgba(255,245,200,0.7);
+            border-radius: 100px;
+            padding: 0.3rem 0.6rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+        }
+
+        /* имена крупные + разноцветные */
+        .card h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0.5rem 0 0.25rem;
+            letter-spacing: -0.3px;
+        }
+
+        /* роль или подпись */
+        .role-tag {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: #f4e2c6;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            color: #5f3d26;
+        }
+
+        .detail {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0.8rem 0;
+            line-height: 1.4;
+            color: #1f2f36;
+        }
+
+        .superpower {
+            font-size: 1.35rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #202020, #2b2b2b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0;
+            border-top: 2px dashed rgba(255, 193, 69, 0.6);
+            display: inline-block;
+            width: 100%;
+        }
+
+        .age-badge {
+            background: #e9dfc7;
+            border-radius: 60px;
+            padding: 0.2rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #4f3b22;
+            margin-top: 0.5rem;
+        }
+
+        /* РАЗНОЦВЕТНЫЕ ШРИФТЫ ДЛЯ ИМЁН (индивидуальные цвета) */
+        .card.lada h2 { color: #D6429E; text-shadow: 0 2px 5px #ffb6e6; }
+        .card.anastasia h2 { color: #29A329; text-shadow: 0 2px 8px #a3e0a3; }
+        .card.babushka h2 { color: #E67E22; text-shadow: 0 2px 8px #ffcd94; }
+        .card.dedushka h2 { color: #2C7DA0; text-shadow: 0 2px 8px #a3d8f0; }
+        .card.kot h2 { color: #A142F5; text-shadow: 0 2px 8px #e0bcff; }
+
+        /* отдельная мечта крупным шрифтом */
+        .dream-text {
+            font-size: 1.45rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #C44569, #E66767);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin: 0.7rem 0;
+        }
+
+        /* дополнительная стилизация */
+        .speed-icon, .clean-icon, .fix-icon, .scratch-icon {
+            font-weight: 800;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            font-size: 1rem;
+            padding: 1rem;
+            background: rgba(245, 240, 215, 0.7);
+            border-radius: 60px;
+            backdrop-filter: blur(5px);
+            color: #2f4858;
+            font-weight: 500;
+        }
+
+        @media (max-width: 680px) {
+            body { padding: 1.2rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .card h2 { font-size: 1.8rem; }
+            .detail { font-size: 1rem; }
+            .superpower { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>✨ БРИЛЛИАНТОВАЯ СЕМЬЯ ✨</h1>
+        <p>⭐ Суперспособности, мечты и безграничная любовь ⭐</p>
+    </div>
+
+    <div class="cards-grid">
+        <!-- КАРТОЧКА ЛАДЫ (ребёнок) -->
+        <div class="card lada">
+            <div class="avatar">👧✨</div>
+            <h2>ЛАДА</h2>
+            <div class="role-tag">⭐ Внучка & путешественница</div>
+            <div class="detail"><strong>🎂 Возраст:</strong> 10 лет</div>
+            <div class="dream-text">🌍 Мечта: Побывать в разных странах мира! 🌏</div>
+            <div class="superpower">✈️ Любознательность и открытость миру ✈️</div>
+            <div class="age-badge">❤️ Сердце исследователя</div>
+        </div>
+
+        <!-- КАРТОЧКА АНАСТАСИИ (родитель) -->
+        <div class="card anastasia">
+            <div class="avatar">🦸‍♀️⚡</div>
+            <h2>АНАСТАСИЯ</h2>
+            <div class="role-tag">Мама-супергерой</div>
+            <div class="detail"><strong>Суперспособность:</strong></div>
+            <div class="superpower">🏃‍♀️💨 СУПЕРСКОРОСТЬ! Успевает везде и всегда 💨✨</div>
+            <div class="age-badge">🚀 Молниеносная поддержка</div>
+        </div>
+
+        <!-- КАРТОЧКА БАБУШКИ ТАМАРЫ МИХАЙЛОВНЫ -->
+        <div class="card babushka">
+            <div class="avatar">🧹✨🧼</div>
+            <h2>ТАМАРА МИХАЙЛОВНА</h2>
+            <div class="role-tag">Бабушка-волшебница порядка</div>
+            <div class="detail"><strong>🎂 70 лет</strong> · Суперсила:</div>
+            <div class="superpower">🧽 ВСЕГДА И ВЕЗДЕ НАВОДИТ ПОРЯДОК 🧹✨</div>
+            <div class="age-badge">🌟 Идеальный уют и гармония</div>
+        </div>
+
+        <!-- КАРТОЧКА ДЕДУШКИ ДМИТРИЯ ИВАНОВИЧА -->
+        <div class="card dedushka">
+            <div class="avatar">🔧⚙️🛠️</div>
+            <h2>ДМИТРИЙ ИВАНОВИЧ</h2>
+            <div class="role-tag">Дедушка-мастер</div>
+            <div class="detail"><strong>🎂 83 года</strong> · Секретное умение:</div>
+            <div class="superpower">🔩 ЧИНИТ ВСЁ! От сломанной игрушки до любой техники 💪🔧</div>
+            <div class="age-badge">⚡ Мастер «Золотые руки»</div>
+        </div>
+
+        <!-- КАРТОЧКА КОТА МАРТИНА -->
+        <div class="card kot">
+            <div class="avatar">🐾🐱😼</div>
+            <h2>МАРТИН</h2>
+            <div class="role-tag">Хранитель дивана & воин</div>
+            <div class="detail"><strong>🐟 Возраст: 16 лет</strong> (мудрый кот)</div>
+            <div class="superpower">😾 ЦАРАПАЕТ ВСЁ ВОКРУГ! Мебель, обои и когтеточки 🐾⚡</div>
+            <div class="age-badge">🔥 Непредсказуемый ураган</div>
+        </div>
+    </div>
+
+    <footer>
+        🌟 Каждый день — приключение, когда ты в кругу своей супер-семьи! <br>
+        💎 Лада мечтает о мире, Анастасия мчится на помощь, бабушка создаёт идеальный порядок, <br>
+        дедушка чинит любые поломки, а кот Мартин добавляет дерзости! 💎
+    </footer>
+</div>
+</body>
+</html>
