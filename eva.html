@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Суперсемья | Ева, Виктор, Лиза и Татьяна</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffc0cb;  /* основной розовый фон */
+            font-family: 'Segoe UI', 'Nunito', 'Roboto', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+            color: #2d1b1f;
+            line-height: 1.4;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+
+        /* ГЛАВНЫЙ КОНТЕЙНЕР — квадратные углы везде */
+        .site-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: transparent;
+        }
+
+        /* ЗАГОЛОВКИ — крупный шрифт */
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-align: center;
+            color: #8b3c4a;
+            text-shadow: 4px 4px 0 #ffe2e9;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        .subhead {
+            text-align: center;
+            font-size: 1.7rem;
+            font-weight: 600;
+            background: rgba(255, 235, 240, 0.7);
+            display: inline-block;
+            width: auto;
+            margin: 0 auto 2rem auto;
+            padding: 0.6rem 2rem;
+            border: 3px solid #b15466;
+            border-radius: 0px;
+            color: #631f2e;
+            backdrop-filter: blur(2px);
+        }
+
+        /* СЕТКА ДЛЯ КАРТОЧЕК — 4 карточки */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ОБЩИЙ СТИЛЬ КАРТОЧЕК — квадратные углы, крупные элементы */
+        .card {
+            background: #fff9fa;
+            border: 4px solid #b35d6e;
+            box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.08);
+            padding: 2rem 1.8rem;
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border-radius: 0px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 18px 18px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        /* иконки-эмодзи увеличены */
+        .card-icon {
+            font-size: 4rem;
+            display: inline-block;
+            margin-bottom: 0.6rem;
+            background: #ffdee4;
+            padding: 0.4rem 1rem;
+            border: 3px solid #b35d6e;
+            border-radius: 0px;
+            width: fit-content;
+        }
+
+        .card-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0.5rem 0 0.5rem 0;
+            color: #9e3f52;
+            letter-spacing: -0.01em;
+            border-left: 8px solid #ff8da1;
+            padding-left: 0.9rem;
+        }
+
+        .info-line {
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin: 0.8rem 0 0.4rem 0;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .info-label {
+            background: #ffb7c5;
+            padding: 0.2rem 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #3a181f;
+            border: 2px solid #982e44;
+            border-radius: 0px;
+        }
+
+        .info-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #551e2c;
+            word-break: break-word;
+        }
+
+        .dream-text {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: #fff0f3;
+            padding: 0.4rem 1rem;
+            margin: 0.8rem 0;
+            border-left: 6px solid #e65c7c;
+            border-radius: 0px;
+        }
+
+        .super-badge {
+            background: #ffb347;
+            border: 3px solid #962d46;
+            padding: 0.2rem 0.9rem;
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+
+        /* кнопки — квадратные, крупные */
+        .action-btn {
+            background: #e65c7c;
+            border: 3px solid #891f3a;
+            color: white;
+            font-size: 1.6rem;
+            font-weight: bold;
+            padding: 0.8rem 1.8rem;
+            cursor: pointer;
+            margin: 1rem 0 0.8rem 0;
+            transition: all 0.1s linear;
+            text-align: center;
+            display: inline-block;
+            font-family: inherit;
+            border-radius: 0px;
+            box-shadow: 4px 4px 0 #631e30;
+            width: auto;
+        }
+
+        .action-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0 #631e30;
+        }
+
+        /* поле для вывода сообщений */
+        .message-area {
+            background: #fce9ee;
+            border: 3px solid #b15466;
+            padding: 1rem 1.3rem;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2e141c;
+            min-height: 110px;
+            border-radius: 0px;
+            transition: all 0.2s;
+            word-break: break-word;
+            line-height: 1.4;
+        }
+
+        /* дополнительный декоративный блок */
+        .footer-fun {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.8rem;
+            background: #ffe2ea;
+            border: 3px solid #b35d6e;
+            border-radius: 0px;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        /* адаптивность: мобильная версия */
+        @media (max-width: 880px) {
+            body {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2.8rem;
+            }
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+            .card-title {
+                font-size: 2.5rem;
+            }
+            .info-text, .dream-text {
+                font-size: 1.6rem;
+            }
+            .action-btn {
+                font-size: 1.4rem;
+                padding: 0.7rem 1.5rem;
+            }
+            .message-area {
+                font-size: 1.3rem;
+            }
+            .subhead {
+                font-size: 1.3rem;
+                padding: 0.4rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.5rem;
+            }
+            .info-text {
+                font-size: 1.4rem;
+            }
+            .dream-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="site-container">
+    <h1>👨‍👩‍👧‍👦 СУПЕРСЕМЬЯ ЕВЫ 👨‍👩‍👧‍👦</h1>
+    <div style="text-align: center;">
+        <div class="subhead">✦  сила в любви, чистоте, танцах и шутках!  ✦</div>
+    </div>
+
+    <div class="hero-grid">
+        <!-- КАРТОЧКА 1: ЕВА (ребёнок 9 лет, мечта спасти котёнка) -->
+        <div class="card">
+            <div class="card-icon">👧🐾</div>
+            <div class="card-title">Ева</div>
+            <div class="info-line">
+                <span class="info-label">Возраст</span>
+                <span class="info-text">9 лет</span>
+            </div>
+            <div class="info-line">
+                <span class="info-label">🌟 Мечта</span>
+                <span class="dream-text">💖 спасти котёнка 💖</span>
+            </div>
+            <p style="font-size: 1.4rem; margin: 0.2rem 0 0.5rem; color:#5a2c38; font-weight: 500;">
+                Ева обожает животных и мечтает подарить дом беззащитному котёнку.
+            </p>
+            <button class="action-btn" id="rescueBtn">🐈 Спасти котёнка!</button>
+            <div class="message-area" id="rescueMessage">
+                🔔 Нажми, и мечта Евы сбудется!
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 2: ВИКТОР (папа, 46 лет, крутые шутки) -->
+        <div class="card">
+            <div class="card-icon">🤡🎭</div>
+            <div class="card-title">Виктор</div>
+            <div class="info-line">
+                <span class="info-label">Возраст</span>
+                <span class="info-text">46 лет</span>
+            </div>
+            <div class="info-line">
+                <span class="info-label">⚡ Суперспособность</span>
+                <span class="info-text super-badge">Круто шутить!</span>
+            </div>
+            <p style="font-size: 1.4rem; margin: 0.2rem 0 0.5rem; color:#5a2c38; font-weight: 500;">
+                Папа Виктор заряжает юмором всю семью. Его шутки — лучшее лекарство от грусти.
+            </p>
+            <button class="action-btn" id="jokeBtn">😂 Выдать мощную шутку!</button>
+            <div class="message-area" id="jokeDisplay">
+                🎤 Нажми, и Виктор развеселит всех!
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 3: ЛИЗА (сестра, 15 лет, круто танцует) -->
+        <div class="card">
+            <div class="card-icon">💃🎶</div>
+            <div class="card-title">Лиза</div>
+            <div class="info-line">
+                <span class="info-label">Возраст</span>
+                <span class="info-text">15 лет</span>
+            </div>
+            <div class="info-line">
+                <span class="info-label">✨ Суперсила</span>
+                <span class="info-text super-badge">Круто танцует!</span>
+            </div>
+            <p style="font-size: 1.4rem; margin: 0.2rem 0 0.5rem; color:#5a2c38; font-weight: 500;">
+                Лиза умеет зажигать любое место своими движениями. Её танцы вдохновляют всех вокруг!
+            </p>
+            <button class="action-btn" id="danceBtn">💃 Показать крутой танец!</button>
+            <div class="message-area" id="danceMessage">
+                🎵 Нажми, чтобы Лиза устроила танцевальное шоу!
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 4: ТАТЬЯНА (мама, 44 года, наводить чистоту) -->
+        <div class="card">
+            <div class="card-icon">🧹✨</div>
+            <div class="card-title">Татьяна</div>
+            <div class="info-line">
+                <span class="info-label">Возраст</span>
+                <span class="info-text">44 года</span>
+            </div>
+            <div class="info-line">
+                <span class="info-label">🧼 Суперсила</span>
+                <span class="info-text super-badge">Наводить чистоту!</span>
+            </div>
+            <p style="font-size: 1.4rem; margin: 0.2rem 0 0.5rem; color:#5a2c38; font-weight: 500;">
+                Мама Татьяна превращает хаос в идеальный порядок одним движением руки.
+            </p>
+            <button class="action-btn" id="cleanBtn">🧹 Навести идеальный порядок!</button>
+            <div class="message-area" id="cleanMessage">
+                🌟 Нажми, и дом засияет кристальной чистотой!
+            </div>
+        </div>
+    </div>
+
+    <!-- общий блок со слоганом семьи -->
+    <div class="footer-fun">
+        <span style="font-size: 2rem;">💖</span>  Ева спасает котят, Виктор заряжает смехом, Лиза зажигает танцами, а Татьяна создаёт уют!  <span style="font-size: 2rem;">💖</span><br>
+        ❝ Когда мы вместе — любая мечта сбывается! ❞
+    </div>
+</div>
+
+<script>
+    // ---------- ЕВА: спасти котёнка ----------
+    const rescueBtn = document.getElementById('rescueBtn');
+    const rescueMsgDiv = document.getElementById('rescueMessage');
+
+    const rescueScenarios = [
+        "🐱✨ УРА! Ева нашла голодного котёнка под кустом! Она взяла его на руки, накормила и принесла домой. Котёнок спасён! ❤️ Теперь у него есть любящая семья и имя — Пушок.",
+        "🏠💕 Ева услышала жалобное мяу в парке. Это был крошечный рыжий котёнок. Девочка не раздумывая завернула его в шарф и принесла к ветеринару. Котёнок здоров и живёт с Евой! Сбылась мечта! 🐈",
+        "🌟🤗 Спасательная операция прошла успешно! Ева и папа Виктор вместе заметили котёнка на дереве. Папа помог снять, а Ева согрела малыша. Теперь котёнок в безопасности и мурлычет от счастья!",
+        "🧡🐾 Чудо произошло! Ева спасла котёнка из непростой ситуации. Теперь у них неразлучная дружба. Мечта Евы исполнилась — маленькая жизнь в надёжных руках."
+    ];
+
+    function showRandomRescue() {
+        const randomIndex = Math.floor(Math.random() * rescueScenarios.length);
+        const message = rescueScenarios[randomIndex];
+        rescueMsgDiv.innerHTML = `🐱✨ ${message} ✨🐱`;
+        rescueMsgDiv.style.backgroundColor = "#fce1e8";
+        setTimeout(() => {
+            rescueMsgDiv.style.backgroundColor = "#fce9ee";
+        }, 300);
+    }
+    rescueBtn.addEventListener('click', showRandomRescue);
+
+    // ---------- ВИКТОР: крутые шутки ----------
+    const jokeBtn = document.getElementById('jokeBtn');
+    const jokeDisplayDiv = document.getElementById('jokeDisplay');
+
+    const jokesList = [
+        "— Папа, а правда, что кошки умеют летать? — Только если их никто не видит, но при посадке они громко «мяу»! 😹",
+        "— Почему Ева всегда улыбается, когда папа шутит? — Потому что Виктор шутит так круто, что даже смех живёт в шкафу! 🤣",
+        "— Как называется кот, который любит апельсины? — Мандаринкин-мур-лыка! 🍊🐱",
+        "— Виктор говорит Еве: «Знаешь, почему я супергерой? Потому что заряжаю смехом даже будильник!» ⏰😂",
+        "— Что сказал папа-кот, когда увидел мышку? — «Ева, не смотри — это моя работа по дому!» 🐭😼",
+        "— Как развеселить грустного котёнка? — Позвать Виктора! Он расскажет шутку про сметану и усы! 🥄😸",
+        "— Папа, я хочу спасти всех котят на свете! — А я хочу, чтобы ты каждый день улыбалась. И моя суперсила это сделает! 😁✨",
+        "— Почему компьютер папы Виктора никогда не грустит? — Потому что в нём есть «оперативная память» на шутки! 💻😂",
+        "— Виктор спрашивает: «Ева, какой котёнок самый смешной?» — Тот, который слушает папины анекдоты! 🐾🤣",
+        "— Круглая шутка от Виктора: «Почему кот не играет в карты? Боится, что кто-то заметит его «мур-шлерство»! 🃏🐱"
+    ];
+
+    function tellRandomJoke() {
+        const randomIdx = Math.floor(Math.random() * jokesList.length);
+        const jokeText = jokesList[randomIdx];
+        jokeDisplayDiv.innerHTML = `🎙️ Виктор (голос супергероя): «${jokeText}» 😜`;
+        jokeDisplayDiv.style.borderLeft = "10px solid #ff8da1";
+        setTimeout(() => {
+            jokeDisplayDiv.style.borderLeft = "3px solid #b15466";
+        }, 400);
+    }
+    jokeBtn.addEventListener('click', tellRandomJoke);
+
+    // ---------- ЛИЗА: круто танцует ----------
+    const danceBtn = document.getElementById('danceBtn');
+    const danceMessageDiv = document.getElementById('danceMessage');
+
+    const danceMoves = [
+        "💃🕺 ВАУ! Лиза выдаёт зажигательный хип-хоп! Все вокруг начинают танцевать, даже котёнок Пушок! 🔥",
+        "🎶✨ Лиза включает любимый трек и показывает мощное па из современной хореографии! Идеальный ритм и грация!",
+        "🌟 Лизочка крутит джазовые пируэты! Её танцы заряжают энергией на весь день! 👏😍",
+        "🤸‍♀️🎵 Лиза станцевала уличный фанк! Все соседи выглядывают из окон и аплодируют! Это было невероятно круто!",
+        "💖 Сегодня Лиза устроила танцевальный батл с воображаемыми соперниками и, конечно, победила! Лучший танцор семьи!",
+        "🔥 Лиза показывает движения из TikTok — такой танец завирусится на весь дом! Мама Татьяна даже отложила веник, чтобы посмотреть!"
+    ];
+
+    function showDance() {
+        const randomMove = Math.floor(Math.random() * danceMoves.length);
+        danceMessageDiv.innerHTML = `💃 ЛИЗА ТАНЦУЕТ: «${danceMoves[randomMove]}» 🎶`;
+        danceMessageDiv.style.backgroundColor = "#fbe4ec";
+        setTimeout(() => {
+            danceMessageDiv.style.backgroundColor = "#fce9ee";
+        }, 300);
+    }
+    danceBtn.addEventListener('click', showDance);
+
+    // ---------- ТАТЬЯНА: наводить чистоту ----------
+    const cleanBtn = document.getElementById('cleanBtn');
+    const cleanMessageDiv = document.getElementById('cleanMessage');
+
+    const cleanMessages = [
+        "✨🧹 Магия чистоты! Татьяна одним взмахом сложила все игрушки, протёрла пыль, и дом засиял! Идеальный порядок!",
+        "🌸 Татьяна активировала суперспособность: пылесос сам запрыгал, тряпки заплясали — через минуту квартира сверкает! ✨",
+        "🧼🧽 Мама Татьяна навела кристальную прозрачность на всех поверхностях. Даже котёнок Пушок вылизал свои лапки от восторга!",
+        "🌟 Ультра-чистота! Татьяна расставила всё по местам, помыла окна и организовала идеальный уют. Ни пылинки!",
+        "💎 Супермама убрала даже там, куда не заглядывали годами. Теперь дом похож на страницу из глянцевого журнала!"
+    ];
+
+    function showClean() {
+        const randomClean = Math.floor(Math.random() * cleanMessages.length);
+        cleanMessageDiv.innerHTML = `🧼✨ ТАТЬЯНА: «${cleanMessages[randomClean]}» ✨🧹`;
+        cleanMessageDiv.style.backgroundColor = "#dcfce8";
+        setTimeout(() => {
+            cleanMessageDiv.style.backgroundColor = "#fce9ee";
+        }, 400);
+    }
+    cleanBtn.addEventListener('click', showClean);
+
+    // ---------- НАЧАЛЬНЫЕ ТЕКСТЫ ДЛЯ АТМОСФЕРЫ ----------
+    window.addEventListener('DOMContentLoaded', () => {
+        // Приветственная шутка от Виктора
+        const welcomeJoke = "🐣 Привет! Я Виктор, мне 46, и моя суперсила — поднимать настроение! Почему Ева любит котят? Потому что они умеют слушать мои анекдоты и мурчать в такт! 🎤😺";
+        jokeDisplayDiv.innerHTML = `🎙️ Виктор: «${welcomeJoke}»`;
+        // Для Евы напоминание о мечте
+        rescueMsgDiv.innerHTML = "🐱 Нажми «Спасти котёнка!» и помоги Еве осуществить её заветную мечту. ❤️";
+        // Для Лизы приветствие
+        danceMessageDiv.innerHTML = "🎵 Жми на кнопку, Лиза покажет такие па, что все пустятся в пляс! 💃";
+        // Для Татьяны приветствие
+        cleanMessageDiv.innerHTML = "🧽 Наведи порядок вместе с Татьяной — чистота будет идеальной! ✨";
+    });
+</script>
+</body>
+</html>
