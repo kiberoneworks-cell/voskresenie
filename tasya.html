@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Семья Таисии, Артёма и Ларисы — мечты и суперсилы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(145deg, #fff5e6 0%, #ffefdb 100%);
+      color: #3b2a1f;
+      line-height: 1.4;
+    }
+
+    html {
+      font-size: 18px;
+    }
+
+    @media (max-width: 600px) {
+      html {
+        font-size: 16px;
+      }
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: rgba(255, 225, 180, 0.7);
+      backdrop-filter: blur(5px);
+      padding: 0.6rem 1.6rem;
+      border-radius: 60px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #b45f2b;
+      margin-bottom: 1.2rem;
+      border: 1px solid #ffe0b5;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #cd7a3a, #a5531c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #bc6f36;
+      max-width: 650px;
+      margin: 0.6rem auto 0;
+    }
+
+    .family-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin: 2rem 0 2rem;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 280px;
+      background: #ffffff;
+      border-radius: 2.8rem;
+      box-shadow: 0 22px 35px -12px rgba(100, 60, 20, 0.2);
+      padding: 2rem 1.8rem 2.2rem;
+      transition: transform 0.25s ease, box-shadow 0.3s;
+      border: 1px solid #ffefda;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 45px -14px rgba(80, 45, 20, 0.25);
+    }
+
+    .avatar-icon {
+      font-size: 3.8rem;
+      background: #fff1e4;
+      width: 110px;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.3rem;
+      border-radius: 60px;
+      transition: all 0.2s;
+      color: #cf7a32;
+    }
+
+    .card.taisiya .avatar-icon { background: #ffe7db; color: #1e5f8e; }  /* полицейский синий оттенок */
+    .card.brother .avatar-icon { background: #e9f3e6; color: #3f8b4c; }
+    .card.parent .avatar-icon { background: #ffe7dc; color: #bc692e; }
+
+    h2 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.3px;
+      color: #3b2c1f;
+    }
+
+    .member-age {
+      display: inline-block;
+      background: #faeeda;
+      padding: 0.3rem 1.3rem;
+      border-radius: 80px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #b45f29;
+      margin-bottom: 1.2rem;
+    }
+
+    .dream-box {
+      background: #fff7ef;
+      border-radius: 2rem;
+      padding: 1rem 1.2rem;
+      margin: 1.3rem 0;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid #ffe2c1;
+    }
+
+    .dream-box i {
+      font-size: 2.4rem;
+      min-width: 50px;
+      text-align: center;
+      color: #e88a38;
+    }
+
+    .dream-text {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: #b7581c;
+    }
+
+    .dream-text span {
+      font-weight: 600;
+      color: #7a582f;
+      display: block;
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    .description {
+      color: #5a3f28;
+      line-height: 1.45;
+      margin: 1rem 0;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .superpower {
+      background: #fcecdb;
+      border-radius: 2rem;
+      padding: 0.8rem 1rem;
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .superpower i {
+      font-size: 1.8rem;
+      color: #e2772a;
+    }
+
+    .superpower span {
+      background: #ffffffc9;
+      padding: 0.2rem 1rem;
+      border-radius: 50px;
+      font-size: 1rem;
+    }
+
+    .hobby-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+      list-style: none;
+    }
+
+    .hobby-list li {
+      background: #f5e7da;
+      padding: 0.4rem 1.1rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #7c532d;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .support-quote {
+      margin-top: 1.4rem;
+      font-style: italic;
+      border-top: 2px dotted #fbddbc;
+      padding-top: 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #a36333;
+    }
+
+    .family-motto {
+      background: #fff3e7;
+      border-radius: 2.8rem;
+      padding: 2rem 2rem;
+      margin-top: 2.5rem;
+      text-align: center;
+      border: 1px solid #ffe0c4;
+      box-shadow: 0 8px 20px -10px rgba(0,0,0,0.05);
+    }
+
+    .family-motto i {
+      font-size: 2.8rem;
+      color: #e6954a;
+      margin-bottom: 0.6rem;
+      display: inline-block;
+    }
+
+    .family-motto p {
+      font-size: 1.35rem;
+      font-weight: 700;
+      max-width: 750px;
+      margin: 0.5rem auto;
+      color: #8b5a32;
+      line-height: 1.45;
+    }
+
+    .family-motto small {
+      font-size: 1rem;
+      display: block;
+      margin-top: 0.9rem;
+      color: #c28147;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #ca8a54;
+      border-top: 2px solid #ffe0c4;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        padding: 1.5rem 1rem 2rem;
+      }
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      h2 {
+        font-size: 1.9rem;
+      }
+      .avatar-icon {
+        width: 90px;
+        height: 90px;
+        font-size: 3rem;
+      }
+      .family-motto p {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        padding: 1.5rem;
+      }
+      .dream-box i {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <div class="hero-badge">
+      <i class="fas fa-heart" style="color:#e28c3a;"></i> 
+      <span>семья — главная опора</span>
+    </div>
+    <h1>Таисия, Артём и супер-мама Лариса</h1>
+    <p>🌼 Здесь живут мечты, вера друг в друга и немного волшебства 🌼</p>
+  </div>
+
+  <div class="family-grid">
+    <!-- КАРТОЧКА ТАИСИИ: значок полицейского (щит со звездой) -->
+    <div class="card taisiya">
+      <div class="avatar-icon">
+        <i class="fas fa-shield-haltered"></i>  <!-- полицейский значок -->
+      </div>
+      <h2>Таисия</h2>
+      <div class="member-age"><i class="fas fa-cake-candles"></i> 11 лет · будущий страж порядка</div>
+      <div class="dream-box">
+        <i class="fas fa-handcuffs"></i>
+        <div class="dream-text">
+          🚔 Моя самая большая мечта
+          <span>стать работником полиции, защищать людей и следить за порядком</span>
+        </div>
+      </div>
+      <div class="description">
+        Смелая, ответственная и очень добрая. Таисия обожает разбираться в сложных ситуациях,
+        помогает младшим и всегда отстаивает справедливость. Учится на отлично, занимается фехтованием
+        и мечтает однажды служить в полиции.
+      </div>
+      <ul class="hobby-list">
+        <li><i class="fas fa-fist-raised"></i> фехтование</li>
+        <li><i class="fas fa-search"></i> детективные игры</li>
+        <li><i class="fas fa-dog"></i> забота о животных</li>
+      </ul>
+      <div class="support-quote">
+        <i class="fas fa-quote-left"></i> «Полицейский — это звучит гордо! Я буду помогать людям каждый день.»
+      </div>
+    </div>
+
+    <!-- КАРТОЧКА АРТЁМА -->
+    <div class="card brother">
+      <div class="avatar-icon">
+        <i class="fas fa-futbol"></i>
+      </div>
+      <h2>Артём</h2>
+      <div class="member-age"><i class="fas fa-baby"></i> 5 лет · маленький футбольный гений</div>
+      <div class="dream-box">
+        <i class="fas fa-trophy"></i>
+        <div class="dream-text">
+          ⚽ Мечта чемпиона
+          <span>стать известным футболистом, забивать голы и побеждать на стадионах мира</span>
+        </div>
+      </div>
+      <div class="description">
+        Невероятно энергичный, быстрый и целеустремлённый! Артём с пелёнок гоняет мяч,
+        обожает футбольные матчи и уже забил свой первый гол во дворе. Он регулярно ходит на тренировки
+        и идет к своей мечте, шаг за шагом становясь сильнее.
+      </div>
+      <ul class="hobby-list">
+        <li><i class="fas fa-running"></i> дриблинг</li>
+        <li><i class="fas fa-medal"></i> дворовые турниры</li>
+        <li><i class="fas fa-users"></i> командные эстафеты</li>
+      </ul>
+      <div class="support-quote">
+        <i class="fas fa-quote-left"></i> «Каждая тренировка приближает меня к большой победе!»
+      </div>
+    </div>
+
+    <!-- КАРТОЧКА МАМЫ ЛАРИСЫ -->
+    <div class="card parent">
+      <div class="avatar-icon">
+        <i class="fas fa-eye"></i>
+      </div>
+      <h2>Лариса</h2>
+      <div class="member-age"><i class="fas fa-heart"></i> 37 лет · мама и детский офтальмолог</div>
+      <div class="superpower">
+        <i class="fas fa-star-of-life"></i>
+        <span>✨ суперспособность ✨</span>
+        <i class="fas fa-magic"></i>
+      </div>
+      <div class="dream-box" style="background: #fef0e5;">
+        <i class="fas fa-stethoscope"></i>
+        <div class="dream-text">
+          👁️ На работе: лечу детские глазки
+          <span>возвращает ясный взгляд маленьким пациентам, дарит радость видеть мир ярко</span>
+        </div>
+      </div>
+      <div class="description">
+        А дома Лариса — настоящая супер-мама! Успевает и поддержать Таисию в её интересах,
+        и погонять с Артёмом мяч, и приготовить полезный ужин. Её любовь и забота
+        делают каждый день тёплым и счастливым.
+      </div>
+      <ul class="hobby-list">
+        <li><i class="fas fa-book-medical"></i> детская офтальмология</li>
+        <li><i class="fas fa-hands-helping"></i> семейные традиции</li>
+        <li><i class="fas fa-family"></i> кулинарные шедевры</li>
+      </ul>
+      <div class="support-quote">
+        <i class="fas fa-quote-left"></i> «Моя главная суперсила — видеть счастливые глаза своих детей и помогать другим детям.»
+      </div>
+    </div>
+  </div>
+
+  <!-- тёплый блок поддержки -->
+  <div class="family-motto">
+    <i class="fas fa-hand-sparkles"></i>
+    <p>💛 Вместе мы — команда, где каждая мечта важна! 💛</p>
+    <small><i class="fas fa-heart" style="color:#e6883a;"></i>  Каждый день — шаг к большой мечте, окружённый заботой  <i class="fas fa-heart" style="color:#e6883a;"></i></small>
+  </div>
+
+  <footer>
+    <i class="far fa-copyright"></i> Семья Таисии, Артёма и Ларисы · мечты под защитой любви
+    <span style="display:inline-block; margin:0 6px;">•</span> 
+    <i class="fas fa-shield-haltered"></i> ⚽ <i class="fas fa-eye"></i>
+  </footer>
+</div>
+</body>
+</html>
