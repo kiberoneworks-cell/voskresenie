@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Алексей & Татьяна — Мечта о Барселоне</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, 'Inter', sans-serif;
+      line-height: 1.5;
+      font-weight: 400;
+      background: #0b2b3b;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    /* ГЛАВНЫЙ КОНТЕЙНЕР — фон с флагом Барселоны и позиционирование игроков */
+    .barcelona-dream {
+      position: relative;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      border-radius: 48px;
+      overflow: hidden;
+      /* овальные углы для всей обертки (как у карточек) */
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    /* ПОЛОСАТЫЙ ФЛАГ БАРСЕЛОНЫ (сине-гранатовые диагональные полосы) */
+    .flag-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: repeating-linear-gradient(
+        125deg,
+        #004d98 0px,
+        #004d98 120px,
+        #a50044 120px,
+        #a50044 240px
+      );
+      background-size: 200% 200%;
+      animation: subtleShift 16s infinite linear;
+    }
+
+    @keyframes subtleShift {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 200% 200%; }
+    }
+
+    /* ИЗОБРАЖЕНИЯ ИГРОКОВ — часть фона (Педри и Лев Яшин) */
+    .player-bg {
+      position: absolute;
+      bottom: 0;
+      z-index: 1;
+      opacity: 0.45;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 215, 0, 0.6);
+      object-fit: cover;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+    }
+
+    .player-pedri {
+      left: 2%;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+    }
+
+    .player-yashin {
+      right: 2%;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+    }
+
+    /* ПОДПИСИ К ИГРОКАМ (стилизованные метки на фоне) */
+    .player-label {
+      position: absolute;
+      bottom: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      color: #f9f3c1;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 60px;
+      letter-spacing: 0.5px;
+      z-index: 2;
+      font-family: inherit;
+      white-space: nowrap;
+      pointer-events: none;
+      border-left: 3px solid #ffde00;
+    }
+
+    .label-left {
+      left: calc(2% + 30px);
+      bottom: 20px;
+    }
+
+    .label-right {
+      right: calc(2% + 30px);
+      bottom: 20px;
+    }
+
+    /* ОСНОВНОЙ КОНТЕНТ (поверх фона и игроков) */
+    .content-overlay {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 248, 235, 0.92);
+      backdrop-filter: blur(1px);
+      margin: 2rem;
+      border-radius: 48px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s;
+    }
+
+    /* сетка карточек */
+    .cards-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    /* карточки с овальными углами */
+    .card {
+      flex: 1;
+      min-width: 260px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 42px;
+      padding: 1.8rem 1.6rem;
+      transition: transform 0.25s ease, box-shadow 0.2s;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(0px);
+      border: 1px solid rgba(255, 255, 200, 0.5);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      background: #ffffff;
+    }
+
+    /* аватарки иконки */
+    .avatar {
+      font-size: 3.8rem;
+      background: #004d98;
+      width: 80px;
+      height: 80px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.3rem;
+      box-shadow: 0 8px 14px rgba(0,0,0,0.1);
+      color: #ffde00;
+      background: linear-gradient(135deg, #004d98, #002d5e);
+    }
+
+    .child-card .avatar {
+      background: linear-gradient(135deg, #a50044, #6f002c);
+    }
+
+    h2 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+      color: #1e2a3a;
+    }
+
+    .child-card h2 {
+      color: #a50044;
+    }
+    .parent-card h2 {
+      color: #004d98;
+    }
+
+    .detail {
+      font-size: 1.2rem;
+      margin: 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .detail strong {
+      font-weight: 700;
+      background: #f0e9db;
+      padding: 0.2rem 0.8rem;
+      border-radius: 60px;
+      font-size: 1rem;
+    }
+
+    .dream-text {
+      background: #ffefc0;
+      border-radius: 30px;
+      padding: 0.9rem 1.2rem;
+      margin-top: 1rem;
+      font-size: 1.15rem;
+      font-weight: 500;
+      border-left: 6px solid #f5b042;
+    }
+
+    .superpower {
+      background: #e1eef7;
+      border-radius: 30px;
+      padding: 0.9rem 1.2rem;
+      margin-top: 1rem;
+      font-size: 1.15rem;
+      font-weight: 500;
+      border-left: 6px solid #004d98;
+    }
+
+    .quote {
+      margin-top: 2rem;
+      text-align: center;
+      font-style: italic;
+      font-size: 1rem;
+      padding-top: 1rem;
+      border-top: 2px dashed rgba(0, 77, 152, 0.3);
+      color: #2c3e2f;
+      font-weight: 500;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #2d2f36;
+      background: rgba(255, 245, 225, 0.8);
+      border-radius: 60px;
+      padding: 0.8rem 1rem;
+      backdrop-filter: blur(4px);
+    }
+
+    /* адаптивность — средний шрифт и пропорции */
+    @media (max-width: 880px) {
+      .content-overlay {
+        margin: 1.2rem;
+        padding: 1.5rem;
+      }
+      .player-pedri, .player-yashin {
+        width: 130px;
+        height: 130px;
+      }
+      .player-label {
+        font-size: 0.65rem;
+        padding: 2px 12px;
+        bottom: 10px;
+      }
+      .label-left {
+        left: calc(2% + 20px);
+      }
+      .label-right {
+        right: calc(2% + 20px);
+      }
+      .card {
+        padding: 1.3rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      .detail, .dream-text, .superpower {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem;
+      }
+      .player-pedri, .player-yashin {
+        width: 95px;
+        height: 95px;
+        opacity: 0.55;
+      }
+      .player-label {
+        display: none; /* на совсем маленьких не загромождаем, но игроки видны */
+      }
+      .content-overlay {
+        padding: 1rem;
+      }
+      .avatar {
+        width: 65px;
+        height: 65px;
+        font-size: 2.8rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .detail {
+        font-size: 0.95rem;
+      }
+      .cards-grid {
+        gap: 1.2rem;
+      }
+    }
+
+    /* декоративная кнопка (необязательная, но стильная) */
+    .inspire {
+      display: inline-block;
+      background: #ffcd3c;
+      color: #1e2a3a;
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="barcelona-dream">
+  <!-- фон: флаг Барселоны (сине-гранатовые полосы) -->
+  <div class="flag-background"></div>
+
+  <!-- Игроки на фоне: полузащитник Педри и вратарь Лев Яшин -->
+  <img 
+    class="player-bg player-pedri" 
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pedri_2021.jpg/400px-Pedri_2021.jpg" 
+    alt="Педри — полузащитник Барселоны"
+    loading="lazy"
+    onerror="this.src='https://via.placeholder.com/180x180?text=Pedri'; this.onerror=null;"
+  >
+  <div class="player-label label-left">⚡ Педри | Полузащитник</div>
+
+  <img 
+    class="player-bg player-yashin" 
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Lev_Yashin_1963.jpg/350px-Lev_Yashin_1963.jpg" 
+    alt="Лев Яшин — легендарный вратарь"
+    loading="lazy"
+    onerror="this.src='https://via.placeholder.com/180x180?text=Yashin'; this.onerror=null;"
+  >
+  <div class="player-label label-right">🧤 Лев Яшин | Вратарь</div>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ: карточки ребёнка и родителя -->
+  <div class="content-overlay">
+    <div class="cards-grid">
+      <!-- Карточка Алексея -->
+      <div class="card child-card">
+        <div class="avatar">⚽</div>
+        <h2>Алексей</h2>
+        <div class="detail">
+          <strong>Возраст</strong> 10 лет
+        </div>
+        <div class="detail">
+          <strong>🔥 Мечта</strong>
+        </div>
+        <div class="dream-text">
+          «Стать профессиональным футболистом <span style="color:#a50044; font-weight:700;">FC Barcelona</span> и выиграть Лигу Чемпионов на «Камп Ноу»!
+        </div>
+        <div class="inspire">🌟 Кумир — Педри, вдохновляется легендой Яшиным</div>
+      </div>
+
+      <!-- Карточка Татьяны (родитель) -->
+      <div class="card parent-card">
+        <div class="avatar">💫</div>
+        <h2>Татьяна</h2>
+        <div class="detail">
+          <strong>Суперспособность</strong>
+        </div>
+        <div class="superpower">
+          ✨ «Хорошо воспитывать чужих детей» ✨<br>
+          Терпение, мудрость и забота — её суперсила. Татьяна умеет направить, вдохновить и создать тепло даже там, где это особенно нужно.
+        </div>
+        <div class="detail">
+          <strong>🤝 Роль в мечте Алексея</strong>
+        </div>
+        <div class="dream-text" style="background:#fff0da; border-left-color:#a50044;">
+          Поддерживает тренировки, верит в характер и помогает не сдаваться на пути к «Барселоне».
+        </div>
+      </div>
+    </div>
+
+    <div class="quote">
+      ⚽ «Семья — лучший фундамент для больших побед. Вместе мы команда!» — Алексей и Татьяна 🌟
+    </div>
+    <footer>
+      💙❤️ Visca el Barça!  •  Сила флага, дух великих игроков и любовь к футболу  •  Мечта сбывается каждый день
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>
