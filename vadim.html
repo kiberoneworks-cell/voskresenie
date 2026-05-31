@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вадим, Аня, Илья, Настя и Юра 🐱</title>
+    <!-- Мультяшные шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffe0c0 0%, #ffcc99 25%, #ffb380 50%, #ffaa66 75%, #ffd1a3 100%);
+            background-size: 400% 400%;
+            animation: warmBg 12s ease infinite;
+            font-family: 'Comic Neue', 'Comic Sans MS', 'Fredoka One', cursive, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            color: #4a2c1a;
+        }
+
+        @keyframes warmBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Декоративные котики на фоне */
+        .bg-cat {
+            position: absolute;
+            font-size: 60px;
+            opacity: 0.15;
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
+            animation: floatCat 8s ease-in-out infinite;
+        }
+        .bg-cat:nth-child(1) { top: 5%; left: 5%; font-size: 70px; animation-delay: 0s; }
+        .bg-cat:nth-child(2) { top: 15%; right: 8%; font-size: 55px; animation-delay: 1.5s; }
+        .bg-cat:nth-child(3) { bottom: 10%; left: 10%; font-size: 80px; animation-delay: 3s; }
+        .bg-cat:nth-child(4) { bottom: 20%; right: 5%; font-size: 65px; animation-delay: 4.5s; }
+        .bg-cat:nth-child(5) { top: 40%; left: 2%; font-size: 50px; animation-delay: 2s; }
+        .bg-cat:nth-child(6) { top: 60%; right: 3%; font-size: 75px; animation-delay: 5.5s; }
+        .bg-cat:nth-child(7) { top: 80%; left: 50%; font-size: 45px; animation-delay: 6.5s; }
+        .bg-cat:nth-child(8) { top: 25%; left: 45%; font-size: 90px; opacity: 0.08; animation-delay: 7s; }
+
+        @keyframes floatCat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-25px) rotate(3deg); }
+            50% { transform: translateY(-10px) rotate(-2deg); }
+            75% { transform: translateY(-30px) rotate(1deg); }
+        }
+
+        /* Основной контейнер */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 248, 235, 0.85);
+            backdrop-filter: blur(8px);
+            border: 5px solid #e07b4b;
+            /* острые углы */
+            box-shadow: 20px 20px 0px rgba(180, 90, 40, 0.3), 0 8px 30px rgba(0, 0, 0, 0.15);
+            padding: 40px 30px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .main-container:hover {
+            box-shadow: 25px 25px 0px rgba(180, 90, 40, 0.4), 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Заголовок */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .header h1 {
+            font-family: 'Fredoka One', 'Comic Sans MS', cursive;
+            font-size: 2.8rem;
+            color: #c45a2c;
+            text-shadow: 4px 4px 0px #ffd1a3, 6px 6px 0px rgba(0, 0, 0, 0.1);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            word-break: break-word;
+        }
+        .header .subtitle {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #8b4a2b;
+            display: inline-block;
+            background: #ffe0b0;
+            padding: 6px 18px;
+            border: 3px solid #e07b4b;
+            /* острые углы */
+            margin-top: 8px;
+        }
+        .header .cats-row {
+            font-size: 2.5rem;
+            letter-spacing: 12px;
+            margin-top: 10px;
+        }
+
+        /* Карточки */
+        .cards-wrapper {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            flex: 1 1 220px;
+            min-width: 220px;
+            max-width: 280px;
+            background: #fff6ea;
+            border: 4px solid #d97a4a;
+            /* острые углы — без border-radius */
+            padding: 28px 18px;
+            position: relative;
+            box-shadow: 12px 12px 0px #cc8b65;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 16px 16px 0px #b8734a;
+        }
+
+        /* Котик-уголок на карточке */
+        .card::before {
+            content: "🐱";
+            position: absolute;
+            top: -22px;
+            left: -10px;
+            font-size: 2.2rem;
+            background: #fff6ea;
+            padding: 0 6px;
+            z-index: 2;
+        }
+        .card::after {
+            content: "🐾";
+            position: absolute;
+            bottom: -20px;
+            right: -8px;
+            font-size: 2rem;
+            background: #fff6ea;
+            padding: 0 6px;
+            z-index: 2;
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 8px;
+            filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.15));
+        }
+        .card h2 {
+            font-family: 'Fredoka One', 'Comic Sans MS', cursive;
+            font-size: 1.9rem;
+            color: #b1451a;
+            margin: 6px 0;
+            letter-spacing: 1px;
+        }
+        .card .detail {
+            background: #ffe3c2;
+            border: 3px solid #e09060;
+            padding: 8px 14px;
+            margin: 8px 0;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #5c2f1a;
+            /* острые углы */
+            width: 100%;
+            box-shadow: 4px 4px 0px #d9a07a;
+        }
+        .card .dream-box {
+            background: #ffdbb5;
+            border: 3px dashed #e07b4b;
+            padding: 12px 14px;
+            margin: 12px 0 4px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #4a2c1a;
+            width: 100%;
+            position: relative;
+            /* острые углы, dashed рамка */
+        }
+        .card .dream-box .cat-paw {
+            font-size: 1.5rem;
+            vertical-align: middle;
+        }
+        .highlight {
+            color: #d9480f;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+        }
+        .superpower {
+            background: #fde7d4;
+            border: 4px solid #e07b4b;
+            padding: 14px 12px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #8b3a1a;
+            margin-top: 8px;
+            width: 100%;
+            position: relative;
+            box-shadow: inset 0 0 0 3px #ffb380;
+            /* острые углы */
+        }
+        .superpower .cat-icon {
+            font-size: 1.9rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* Футер */
+        .footer {
+            margin-top: 35px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #8b4a2b;
+            border-top: 4px solid #e07b4b;
+            padding-top: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .footer span {
+            font-size: 1.8rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 750px) {
+            .main-container {
+                padding: 25px 18px;
+                box-shadow: 10px 10px 0px rgba(180, 90, 40, 0.3);
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .card {
+                min-width: 200px;
+                padding: 20px 14px;
+            }
+            .bg-cat {
+                font-size: 35px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Плавающие фоновые котики -->
+    <div class="bg-cat">🐱</div>
+    <div class="bg-cat">😺</div>
+    <div class="bg-cat">🐈</div>
+    <div class="bg-cat">😸</div>
+    <div class="bg-cat">🐾</div>
+    <div class="bg-cat">🐱</div>
+    <div class="bg-cat">😻</div>
+    <div class="bg-cat">🐈‍⬛</div>
+
+    <!-- Основной блок -->
+    <div class="main-container">
+        <!-- Заголовок -->
+        <div class="header">
+            <h1>🐱 Семейная страничка 🐱</h1>
+            <div class="cats-row">😺 🐾 😸 🐾 😺</div>
+            <div class="subtitle">Вадим, Аня, Илья, мама Настя и папа Юра</div>
+        </div>
+
+        <!-- Карточки: дети и родители -->
+        <div class="cards-wrapper">
+            <!-- Карточка Вадима -->
+            <div class="card">
+                <div class="card-icon">👦🐱💻</div>
+                <h2>Вадим</h2>
+                <div class="detail">
+                    🎂 Возраст: <span class="highlight">11 лет</span>
+                </div>
+                <div class="dream-box">
+                    <span class="cat-paw">🐾</span> Мечта:<br>
+                    <span class="highlight">Стать программистом!</span>
+                    <span class="cat-paw">🐾</span>
+                </div>
+                <div style="margin-top: 6px; font-size: 2.3rem;">🐱💻🐈</div>
+            </div>
+
+            <!-- Карточка Ани (сестра) -->
+            <div class="card">
+                <div class="card-icon">👧🍬💸🐱</div>
+                <h2>Аня</h2>
+                <div class="detail">
+                    🎂 Возраст: <span class="highlight">8 лет</span>
+                </div>
+                <div class="superpower">
+                    <span class="cat-icon">🐱✨🐱</span>
+                    <strong>Суперспособность:</strong><br>
+                    <span class="highlight">Выпрашивать конфеты и транжирить</span>
+                    <span style="display: block; margin-top: 4px; font-size: 1.8rem;">🍭😸💸</span>
+                </div>
+            </div>
+
+            <!-- Карточка Ильи (брат) -->
+            <div class="card">
+                <div class="card-icon">👦💬🐱</div>
+                <h2>Илья</h2>
+                <div class="detail">
+                    🎂 Возраст: <span class="highlight">11 лет</span>
+                </div>
+                <div class="superpower">
+                    <span class="cat-icon">🐱🗣️🐱</span>
+                    <strong>Суперспособность:</strong><br>
+                    <span class="highlight">Бесконечно спорить</span><br>
+                    <span style="font-size: 1rem;">(и выигрывать почти всегда!)</span>
+                    <span style="display: block; margin-top: 4px; font-size: 1.8rem;">🏆😼</span>
+                </div>
+            </div>
+
+            <!-- Карточка Насти (мама) -->
+            <div class="card">
+                <div class="card-icon">👩🐱✨</div>
+                <h2>Настя</h2>
+                <div class="detail">
+                    🦸‍♀️ Мама
+                </div>
+                <div class="superpower">
+                    <span class="cat-icon">🐱⚡🐱</span>
+                    <strong>Суперспособность:</strong><br>
+                    <span class="highlight">Делать много дел одновременно!</span>
+                    <span style="display: block; margin-top: 6px; font-size: 1.8rem;">🐾😼🐾</span>
+                </div>
+                <div style="margin-top: 4px; font-size: 0.9rem; color: #8b4a2b;">
+                    (и всё успевать с котиками!)
+                </div>
+            </div>
+
+            <!-- Карточка Юры (папа) -->
+            <div class="card">
+                <div class="card-icon">👨☕😴🐱</div>
+                <h2>Юра</h2>
+                <div class="detail">
+                    👔 Папа
+                </div>
+                <div class="superpower">
+                    <span class="cat-icon">🐱☕😴🐱</span>
+                    <strong>Суперспособность:</strong><br>
+                    <span class="highlight">Пить кофе литрами</span><br>
+                    <span style="font-size: 1rem;">и всё время хотеть спать</span>
+                    <span style="display: block; margin-top: 4px; font-size: 1.8rem;">☕😼💤</span>
+                </div>
+                <div style="margin-top: 4px; font-size: 0.9rem; color: #8b4a2b;">
+                    (кофе с котиками и подушкой — идеально!)
+                </div>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <div class="footer">
+            <span>🐱</span> Любовь, код и котики <span>🐱</span>
+            <span style="display: block; width: 100%; font-size: 0.95rem; margin-top: 4px;">🐾 Вадим, Аня, Илья, Настя & Юра 🐾</span>
+        </div>
+    </div>
+
+</body>
+</html>
