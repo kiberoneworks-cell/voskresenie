@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Наша семья | Адилет, Ясмина, Ислам, Эльзат, Хома</title>
+  <!-- Google Fonts для крупных и чистых шрифтов -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #9ef01a 0%, #6a9c1a 100%);
+      /* яркий зелёный градиент */
+      color: #1a2c0e;
+      line-height: 1.4;
+      scroll-behavior: smooth;
+    }
+
+    /* крупные шрифты */
+    h1, h2, h3, .large-text {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 4.2rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-subhead {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #1e3a0c;
+      max-width: 700px;
+    }
+
+    p, .text-body {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: #2c2c2c;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* навбар – полупрозрачный белый для контраста */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      padding: 0.4rem 1rem;
+      border-radius: 60px;
+      letter-spacing: -0.3px;
+      color: #2c5e1a;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .logo span {
+      color: #e67e22;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #1e3a0c;
+      background: rgba(255,255,240,0.7);
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      background: #ffffff;
+      color: #e67e22;
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    /* карточки с круглыми углами – белые на зелёном */
+    .card {
+      background: #ffffff;
+      border-radius: 48px;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      transition: all 0.25s ease;
+      border: 4px solid #FFD966;  /* яркая жёлтая рамка для всех карточек участников */
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 40px -12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* дополнительные карточки (dream-card) не обязаны иметь жёлтую рамку, но пусть будет для единства стиля */
+    .dream-card {
+      background: #ffffff;
+      border-radius: 56px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+      border: 4px solid #FFD966;
+    }
+
+    .grid-5col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .rounded-img {
+      border-radius: 48px;
+      width: 100%;
+      object-fit: cover;
+      transition: 0.3s;
+    }
+
+    .icon-circle {
+      background: #efffdf;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 40px;
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      color: #e67e22;
+    }
+
+    .superpower-badge {
+      display: inline-block;
+      background: #fff0e5;
+      border-radius: 100px;
+      padding: 0.5rem 1.4rem;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #c5621a;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #2c5e1a;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      text-decoration: none;
+      transition: 0.2s;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn:hover {
+      transform: scale(0.97);
+      background: #1e4012;
+    }
+
+    .hero {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    .hero-flex {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-left {
+      flex: 1.2;
+    }
+
+    .hero-right {
+      flex: 0.9;
+    }
+
+    .hero-badge {
+      background: rgba(255,255,220,0.9);
+      border-radius: 100px;
+      padding: 0.4rem 1.2rem;
+      display: inline-block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      color: #2c5e1a;
+    }
+
+    footer {
+      background: #1e3a0c;
+      border-radius: 48px 48px 0 0;
+      padding: 3rem 0 2rem;
+      margin-top: 2rem;
+      text-align: center;
+      color: #eaffd0;
+    }
+
+    footer a {
+      color: #f9d56e;
+    }
+
+    @media (max-width: 900px) {
+      h1 { font-size: 3rem; }
+      h2 { font-size: 2.2rem; }
+      h3 { font-size: 1.8rem; }
+      .grid-2col { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-flex { flex-direction: column; text-align: center; }
+      .navbar { flex-direction: column; gap: 1rem; }
+      .nav-links { justify-content: center; gap: 1rem; }
+      .container { padding: 0 1.5rem; }
+      section { padding: 3.5rem 0; }
+    }
+
+    @media (max-width: 550px) {
+      h1 { font-size: 2.5rem; }
+      .text-body { font-size: 1rem; }
+      .icon-circle { width: 64px; height: 64px; font-size: 2rem; }
+    }
+
+    img, .card, .dream-card, .superpower-badge, .btn, .logo {
+      border-radius: 56px;
+    }
+
+    hr {
+      margin: 2rem 0;
+      border: 0;
+      height: 2px;
+      background: #ececec;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="container">
+  <div class="navbar">
+    <div class="logo">
+      <span>❤️</span> Семья Адилета
+    </div>
+    <ul class="nav-links">
+      <li><a href="#family">Все о нас</a></li>
+      <li><a href="#adilet">Адилет</a></li>
+      <li><a href="#yasmina">Ясмина</a></li>
+      <li><a href="#islam">Ислам</a></li>
+      <li><a href="#elzat">Эльзат</a></li>
+      <li><a href="#homa">Хома</a></li>
+      <li><a href="#dreams">Мечты</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <!-- Герой-секция: семья -->
+  <section class="hero">
+    <div class="container hero-flex">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <i class="fas fa-heart"></i> наша дружная команда
+        </div>
+        <h1>Адилет, Ясмина,<br>Ислам, Эльзат и Хома</h1>
+        <p class="section-subhead">Родители с суперспособностями, дети с большими мечтами и хомяк с необычным режимом. Вместе мы объедем весь мир!</p>
+        <div style="margin-top: 2rem;">
+          <a href="#dreams" class="btn"><i class="fas fa-star"></i> Наши мечты</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img class="rounded-img" src="https://images.unsplash.com/photo-1511895426328-10f5caf04c87?w=600&auto=format" alt="Счастливая семья" style="max-height: 380px; width: 100%; object-fit: cover;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Секция: все члены семьи (5 карточек) с жёлтыми рамками -->
+  <section id="family">
+    <div class="container">
+      <h2 style="text-align: center; color: #1e3a0c;">✨ Наша супер-семья ✨</h2>
+      <div class="grid-5col" style="margin-top: 2rem;">
+        <!-- Адилет -->
+        <div class="card" id="adilet">
+          <div class="icon-circle">
+            <i class="fas fa-child"></i>
+          </div>
+          <h3>Адилет, 10 лет</h3>
+          <p><strong>Путешественник и исследователь</strong>. Обожает карты, культуры разных стран и мечтает объехать всю планету.</p>
+          <div class="superpower-badge" style="background: #eef2ff; color:#2c5282;">
+            <i class="fas fa-globe-americas"></i> Мечта: все страны мира
+          </div>
+        </div>
+        <!-- Ясмина -->
+        <div class="card" id="yasmina">
+          <div class="icon-circle">
+            <i class="fas fa-tooth"></i>
+          </div>
+          <h3>Ясмина, 8 лет</h3>
+          <p><strong>Заботливая и любопытная</strong>. Мечтает стать стоматологом, чтобы дарить красивые улыбки.</p>
+          <div class="superpower-badge" style="background: #ffe8f0; color:#b13e6b;">
+            <i class="fas fa-smile"></i> Мечта: стоматолог
+          </div>
+        </div>
+        <!-- Ислам (папа) – добавлен возраст 36 лет -->
+        <div class="card" id="islam">
+          <div class="icon-circle">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3>Ислам — папа, 36 лет</h3>
+          <p><strong>Суперсила: договариваться со всеми</strong>. Убедит кого угодно: от авиакомпаний до посольств.</p>
+          <div class="superpower-badge">
+            <i class="fas fa-comments"></i> Мастер переговоров
+          </div>
+        </div>
+        <!-- Эльзат (мама) – добавлен возраст 38 лет -->
+        <div class="card" id="elzat">
+          <div class="icon-circle">
+            <i class="fas fa-carrot"></i>
+          </div>
+          <h3>Эльзат — мама, 38 лет</h3>
+          <p><strong>Суперсила: правильное питание</strong>. Готовит вкуснейшие и полезные блюда, заряжает энергией.</p>
+          <div class="superpower-badge">
+            <i class="fas fa-apple-alt"></i> ЗОЖ-эксперт
+          </div>
+        </div>
+        <!-- Хома (хомяк) -->
+        <div class="card" id="homa">
+          <div class="icon-circle">
+            <i class="fas fa-hamster"></i>
+          </div>
+          <h3>Хома — хомяк</h3>
+          <p><strong>Особенный режим</strong>: ночью не спит, а днём спит. Настоящий ночной сторож и любитель тишины.</p>
+          <div class="superpower-badge" style="background: #e0f2fe; color:#0369a1;">
+            <i class="fas fa-moon"></i> Активен ночью &nbsp;|&nbsp; <i class="fas fa-sun"></i> Спит днём
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Блок: подробнее о детях и хомяке (тоже жёлтые рамки) -->
+  <section>
+    <div class="container">
+      <div class="grid-2col">
+        <div class="card">
+          <img class="rounded-img" src="https://images.unsplash.com/photo-1503917988258-a6c3a6d1d8ae?w=600&auto=format" alt="Адилет мечтает о путешествиях" style="height: 240px; object-fit: cover; margin-bottom: 1rem;">
+          <h3>🌍 Адилет и его мечта: все страны</h3>
+          <p>Адилет уже изучил флаги 50 стран, коллекционирует монеты и планирует маршруты. Его цель — побывать в каждой стране мира. Папа Ислам (36 лет) договаривается о визах и билетах, а мама Эльзат (38 лет) готовит полезные перекусы в дорогу.</p>
+        </div>
+        <div class="card">
+          <img class="rounded-img" src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&auto=format" alt="Ясмина и стоматология" style="height: 240px; object-fit: cover; margin-bottom: 1rem;">
+          <h3>🦷 Ясмина — будущий стоматолог</h3>
+          <p>Ясмина обожает играть в «стоматолога» и мечтает, чтобы дети не боялись лечить зубы. Мама учит её выбирать полезные сладости, папа — договариваться.</p>
+        </div>
+      </div>
+      <!-- Карточка про Хому -->
+      <div class="card" style="margin-top: 2rem;">
+        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+          <i class="fas fa-hamster" style="font-size: 4rem; color: #e67e22;"></i>
+          <div>
+            <h3 style="margin-bottom: 0.25rem;">Хома — ночной исследователь</h3>
+            <p class="text-body">Хома — самый необычный хомяк. Он любит крутить колесо, когда все ложатся спать, и сладко дремлет весь день. Ночью он изучает свою клетку, а днём прячется в домике. Дети обожают наблюдать за его ночными приключениями, а мама Эльзат следит, чтобы у Хомы всегда были полезные лакомства. Папа Ислам договорился с ветеринаром о специальном режиме кормления для ночного зверька.</p>
+            <div class="superpower-badge" style="margin-top: 0.75rem;">
+              <i class="fas fa-clock"></i> График: ночь — бодрствование, день — сон
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Суперспособности родителей (карточки с жёлтой рамкой) -->
+  <section>
+    <div class="container">
+      <h2 style="text-align: center; color:#1e3a0c;">⭐ Родительские суперсилы ⭐</h2>
+      <div class="grid-2col" style="margin-top: 2rem;">
+        <div class="card" style="text-align: center;">
+          <i class="fas fa-handshake" style="font-size: 3.5rem; color:#e67e22; margin-bottom: 1rem;"></i>
+          <h3>Ислам (36 лет): договориться со всеми</h3>
+          <p>Легко находит общий язык с директором школы, тренером, продавцом и даже с ветеринаром для Хомы. Благодаря этой суперспособности семья получает скидки и решает любые вопросы.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <i class="fas fa-apple-alt" style="font-size: 3.5rem; color:#e67e22; margin-bottom: 1rem;"></i>
+          <h3>Эльзат (38 лет): правильное питание</h3>
+          <p>Готовит так, что даже брокколи хочется добавки. Знает всё о витаминах для детей и хомяка. Её полезные угощения любят все — от Адилета до Хомы.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Секция мечты: обновлённая мечта Адилета + Ясмина (жёлтая рамка) -->
+  <section id="dreams">
+    <div class="container">
+      <div class="dream-card">
+        <div style="display: inline-block; background: #e67e22; padding: 0.5rem 1.8rem; border-radius: 60px; color: white; font-weight: 800; margin-bottom: 1.5rem;">
+          🌟 Наши большие мечты 🌟
+        </div>
+        <div class="grid-2col" style="margin-top: 1rem;">
+          <div>
+            <i class="fas fa-globe-americas" style="font-size: 2.5rem; color:#e67e22; margin-bottom: 0.5rem;"></i>
+            <h3 style="font-size: 1.8rem;">Адилет: все страны мира!</h3>
+            <p>Адилет мечтает побывать в каждой стране: от Японии до Бразилии, от Норвегии до Новой Зеландии. Он уже начал учить английский и испанский, коллекционирует магнитики и ведёт дневник путешественника. С поддержкой папы-переговорщика (Ислам, 36 лет) и мамы-диетолога (Эльзат, 38 лет) эта мечта обязательно сбудется!</p>
+          </div>
+          <div>
+            <i class="fas fa-tooth" style="font-size: 2.5rem; color:#e67e22; margin-bottom: 0.5rem;"></i>
+            <h3 style="font-size: 1.8rem;">Ясмина: стоматолог</h3>
+            <p>Хочет лечить зубы и дарить улыбки. Уже практикуется на игрушках, а папа договаривается о стажировке в будущем.</p>
+          </div>
+        </div>
+        <hr>
+        <p style="margin-top: 0.5rem;"><i class="fas fa-hamster"></i> А Хома мечтает о новой ночной беговой дорожке и вкусных семечках ❤️</p>
+        <p style="margin-top: 1rem; font-size: 1rem;">Ислам уже договаривается с авиакомпаниями о кругосветном путешествии, Эльзат печёт полезные печенья для дальних дорог, а Хома ночью изучает карту мира вместе с Адилетом!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Семейные традиции (карточки с жёлтой рамкой) -->
+  <section>
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="color:#1e3a0c;">❤️ Наша команда — наша сила</h2>
+        <p class="section-subhead" style="margin: 0 auto; color:#2c5e1a;">«Когда у каждого есть суперспособность, даже хомяк помогает нам быть ближе»</p>
+      </div>
+      <div class="grid-2col">
+        <div class="card" style="text-align: center;">
+          <i class="fas fa-people-arrows" style="font-size: 3rem; color: #e67e22; margin-bottom: 1rem;"></i>
+          <h3>Слушаем друг друга</h3>
+          <p>Каждый вечер делимся новостями. Хома, кстати, внимательно слушает ночью и одобряет наши планы.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <i class="fas fa-utensils" style="font-size: 3rem; color: #e67e22; margin-bottom: 1rem;"></i>
+          <h3>ЗОЖ-традиции</h3>
+          <p>Мама Эльзат (38 лет) готовит полезные ужины для всех, включая специальные смеси для Хомы. Папа Ислам (36 лет) договаривается о новых рецептах с диетологом.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p style="font-size: 1.2rem;">❤️ Адилет, Ясмина, Ислам (36), Эльзат (38) и Хома — одна дружная семья ❤️</p>
+    <p style="margin-top: 0.8rem; font-size: 1rem;">Суперсилы: договориться со всеми + правильное питание + ночная активность Хомы = счастливое детство</p>
+    <div style="margin-top: 1.5rem;">
+      <i class="fas fa-globe-americas"></i> Все страны &nbsp;&nbsp; <i class="fas fa-tooth"></i> Стоматология &nbsp;&nbsp; <i class="fas fa-hamster"></i> Хома
+    </div>
+    <p style="margin-top: 2rem; font-size: 0.8rem;">© 2025 Сайт о нашей семье | Яркий зелёный фон, жёлтые рамки, крупные шрифты, круглые углы</p>
+  </div>
+</footer>
+
+<!-- плавный скролл -->
+<script>
+  document.querySelectorAll('.nav-links a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
